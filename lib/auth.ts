@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { createContext, useContext, useEffect, useState } from "react"
 import type { Database } from "./supabase"
 
@@ -121,7 +120,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem("lms_user")
   }
 
-  return <AuthContext.Provider value={{ user, loading, signIn, signOut }}>{children}</AuthContext.Provider>
+  const contextValue = {
+    user,
+    loading,
+    signIn,
+    signOut,
+  }
+
+  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 }
 
 export const useAuth = () => {
